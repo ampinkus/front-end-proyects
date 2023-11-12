@@ -1,0 +1,191 @@
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure the body takes at least the full height of the viewport */
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* Your content container */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the content horizontally */
+  justify-content: center; /* Center the content vertically */
+  flex: 1; 
+  background-color:#333;
+}
+
+.ext-rectangle {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the content horizontally */
+  justify-content: center; /* Center the content vertically */
+  width: 1000px;
+  height: 700px;
+  background-color: aquamarine;
+  border-radius: 10px;
+  z-index: 1;
+}
+
+.int-rectangle {
+  display: flex;
+  position: relative;  /* This makes it the positioned ancestor */
+  width: 900px;
+  height: 450px;
+  background-color:antiquewhite;
+  border-radius: 30px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); /* Add a shadow with offset-x, offset-y, blur-radius, and color */
+  z-index: 1.5;
+}
+
+.picture {
+  position: absolute; /* Positioned relative to its nearest positioned ancestor int-rectangle */
+  top: 55%; /* Center the image vertically */
+  left: 40%; /* Center the image horizontally */
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.left-column {
+  flex: 1; /* Take 1/3 of the width */
+  color: white;
+  background-color: green; /* Set the background color to green */
+  padding-top: 10rem; /* Add padding for spacing */
+  padding-left: 1.5rem; /* Add padding for spacing */;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+.left-column p {
+  padding-top: 5px;
+  margin-top: 2px;
+}
+
+.icons{
+  color: white;
+  padding-top: 3.5rem;
+}
+
+.icons a {
+  color: white;
+}
+
+.icons a:hover {
+  color:aquamarine;
+  text-decoration: underline;
+}
+
+.icons a:visited {
+  color: white;
+}
+
+
+.right-column {
+  flex: 2; /* Take 2/3 of the width */
+  padding: 20px; /* Add padding for spacing */
+  color: black;
+}
+
+.surname{
+  margin-left: 200px;
+  margin-top: 60px;
+  color:green;
+  font-size: 2.2rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.name{
+  margin-left: 200px;
+  font-size: 2.2rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.knowledge{
+  margin-top: 15px;
+  margin-left: 200px;
+  font-weight: bold;
+}
+
+.resumen{
+  margin-top: 15px;
+  margin-left: 200px;
+}
+
+.white-rectangle {
+  position: absolute;
+  bottom: 100px;
+  width: 40%;
+  height: 15px;
+  background-color:white;
+  z-index: 0.8;
+}
+
+.footer {
+  padding: 10px;
+  text-align: center;
+  background-color: #111; 
+}
+
+.footer a{
+  text-decoration: none;
+  cursor: pointer;
+  color: antiquewhite;
+}
+
+a:visited {
+  color:white;
+}
+
+a:hover, a:focus {    
+  color:aquamarine;
+  text-decoration: underline ;
+}
+
+.center01 {
+  position: absolute;
+  background:antiquewhite;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  top: 90px;
+  left: 200px;
+  /* z-index: 1; */
+}
+
+.center02 {
+  position: absolute;
+  width: 60px;
+  height: 40px;
+  top: 365px;
+  left: 200px;
+  border-radius: 10%;
+  z-index: 1;
+  background: linear-gradient(to bottom right,slategray,lightgrey);
+}
+
+.center03 {
+  position: absolute;
+  background: linear-gradient(to bottom right,lightgrey,slategray);
+  width: 60px;
+  height: 40px;
+  top: 90px;
+  left: 450px;
+  border-radius: 10%;
+  z-index: 1;
+}
+
+.center04 {
+  position: absolute;
+  background:green;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  top: 0px;
+  left: 840px;
+  z-index: 0;
+}
+
+
