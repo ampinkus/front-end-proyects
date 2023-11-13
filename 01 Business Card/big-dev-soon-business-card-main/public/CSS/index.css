@@ -1,31 +1,58 @@
+/* 
+In your CSS code, you've set the `flex-direction` property to `column` for the `body` element. This property defines the direction in which the child elements 
+of the container should be placed. When you set it to `column`, it means the child elements will be placed vertically, one on top of the other.
 
+In the case of the `body` element, setting `flex-direction: column;` may not have a noticeable effect because the `body` itself typically contains only one child element, 
+which is the `main` element with the class `main-content`. Since you've already set `display: flex;` on `.main-content` and specified its `flex-direction` property, 
+the layout of the `.main-content` is influenced by its own styles rather than the `body` styles.
+
+If you were to have multiple direct child elements within the `body` and you wanted them to be stacked vertically, 
+the `flex-direction: column;` on the `body` would have a more noticeable effect.
+
+In short, in this specific code snippet, the `flex-direction: column;` on the `body` might not make a significant difference due to the structure of your HTML 
+and the styles applied to the `.main-content`. Removing it might not alter the layout because the primary flex container is `.main-content`. 
+*/
 body {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   min-height: 100vh; /* Ensure the body takes at least the full height of the viewport */
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-/* Your content container */
+
+/* Your content container 
+As main has only one container ext-rectangle the line: flex-direction: column; has no effect?
+You are correct. In the given code, the `.main-content` class is applied to the `main` element, and within that, there's only one child container with the class `.ext-rectangle`. 
+Since there's only one child, the `flex-direction: column;` property might not have a noticeable effect.
+
+The `flex-direction: column;` property is most useful when you have multiple child elements within the flex container, and you want them to be arranged vertically. 
+In your case, since there's only one child element (`.ext-rectangle`), it will be centered both horizontally and vertically due to the `align-items: center;` and `justify-content: center;` properties.
+
+If you had more than one child element inside `.main-content`, the `flex-direction: column;` property would make those child elements stack vertically. 
+But as it stands, it doesn't have a significant impact on the current layout.
+*/
 .main-content {
   display: flex;
-  flex-direction: column;
-  align-items: center; /* Center the content horizontally */
-  justify-content: center; /* Center the content vertically */
+  /* flex-direction: column; */
+  align-items: center; /* Center the content vertically */
+  justify-content: center; /* Center the content horizontal */
   flex: 1; 
   background-color:#333;
 }
 
+/* 
+As ext-rectangle has only one container int-rectangle the line: flex-direction: column; has no effect
+*/
 .ext-rectangle {
   display: flex;
-  flex-direction: column;
-  align-items: center; /* Center the content horizontally */
-  justify-content: center; /* Center the content vertically */
+  /* flex-direction: column; */
+  align-items: center; 
+  justify-content: center; 
   width: 1000px;
   height: 700px;
   background-color: aquamarine;
   border-radius: 10px;
-  z-index: 1;
+  /* z-index: 1; */
 }
 
 .int-rectangle {
@@ -36,17 +63,48 @@ body {
   background-color:antiquewhite;
   border-radius: 30px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); /* Add a shadow with offset-x, offset-y, blur-radius, and color */
-  z-index: 1.5;
-}
-
-.picture {
-  position: absolute; /* Positioned relative to its nearest positioned ancestor int-rectangle */
-  top: 55%; /* Center the image vertically */
-  left: 40%; /* Center the image horizontally */
-  transform: translate(-50%, -50%);
   z-index: 1;
 }
 
+/* 
+The positioning of the picture is relative to the int rectangle!
+The difference between `top` and `bottom` is in their effect on positioning an element within its containing element.
+- **`top`**: Specifies the distance between the top edge of the positioned element and the top edge of its containing block. In your case, `top: 26%;` means the 
+              top edge of the `.picture` element will be positioned 26% down from the top edge of its containing block (`.int-rectangle`).
+
+- **`bottom`**: Specifies the distance between the bottom edge of the positioned element and the bottom edge of its containing block. If you were using `bottom` instead of `top`, 
+                it would position the bottom edge of the `.picture` element a certain percentage or length from the bottom edge of its containing block.
+
+Whether to use percentages or pixels depends on your design preferences and responsiveness goals:
+- **Percentages**: They are often used for responsive designs as they are relative to the size of the containing element. 
+                    Using percentages makes it easier to create layouts that adapt to different screen sizes.
+
+- **Pixels**: Using fixed pixel values can provide more precise control over the positioning, but it may be less flexible for responsive designs. 
+              Fixed pixel values are not responsive to changes in screen size or different devices.
+
+In your case, using percentages (`top: 26%; left: 25%;`) indicates that you want the position of the `.picture` element to be a relative percentage of the size of its containing block (`.int-rectangle`). This can be useful for creating layouts that adapt well to different screen sizes.
+*/
+.picture {
+  position: absolute;   /* Positioned relative to its nearest positioned ancestor int-rectangle */
+  /* move the image vertically */
+  top: 26%; 
+   /* move the image horizontally */
+  left: 25%;
+  /* The picture over the white circle */
+  z-index: 1; 
+}
+
+/* 
+The positioning of the .left-column element in relation to the .int-rectangle is determined by the flex properties you've set on the parent elements.
+
+The .ext-rectangle is a flex container (due to its default display: flex; behavior), and its children, including the .left-column, will be flex items. 
+The flex properties like flex: 1; on the .left-column are used to distribute available space within the flex container.
+
+In this case, the .left-column is set to take up 1/3 of the width of the .ext-rectangle (flex: 1;). The .int-rectangle is also a child of .ext-rectangle, 
+and it takes up the remaining 2/3 of the width because of the flex: 2; property on the .right-column.
+
+So, the positioning of .left-column in relation to .int-rectangle is inherently handled by the flex layout without needing explicit positioning properties like position: absolute;. They both share the same parent container (.ext-rectangle) and the flex properties dictate their sizes within that container.
+*/
 .left-column {
   flex: 1; /* Take 1/3 of the width */
   color: white;
@@ -57,36 +115,35 @@ body {
   border-bottom-left-radius: 30px;
 }
 
-.left-column p {
-  padding-top: 5px;
-  margin-top: 2px;
-}
-
-.icons{
-  color: white;
-  padding-top: 3.5rem;
-}
-
-.icons a {
-  color: white;
-}
-
-.icons a:hover {
-  color:aquamarine;
-  text-decoration: underline;
-}
-
-.icons a:visited {
-  color: white;
-}
-
-
+/* Formateo la columna de la derecha */
 .right-column {
   flex: 2; /* Take 2/3 of the width */
   padding: 20px; /* Add padding for spacing */
   color: black;
 }
 
+/* Posiciono los parrafos de la columna izquierda */
+.left-column p {
+  padding-top: 5px;
+  margin-top: 2px;
+}
+
+/* Posiciono los íconos */
+.icons {
+  padding-top: 3.5rem;
+}
+
+/* Cambio el color de los íconos del default negro al blanco */
+.icons a{
+  color: white;
+}
+
+/* Para  hacer focus con los TAB*/
+.icons a:focus {    
+  font-size: 1rem;
+}
+
+/* Estilo del font del apellido */
 .surname{
   margin-left: 200px;
   margin-top: 60px;
@@ -96,6 +153,7 @@ body {
   letter-spacing: 2px;
 }
 
+/* Estilo del font del nombre */
 .name{
   margin-left: 200px;
   font-size: 2.2rem;
@@ -103,47 +161,29 @@ body {
   letter-spacing: 2px;
 }
 
+/* Estilo del font de los conocimientos */
 .knowledge{
   margin-top: 15px;
   margin-left: 200px;
   font-weight: bold;
 }
 
+/* Estilo del font del resumen */
 .resumen{
   margin-top: 15px;
   margin-left: 200px;
 }
 
+/* El rectangulo que cruza el .left-column */
 .white-rectangle {
   position: absolute;
   bottom: 100px;
   width: 40%;
   height: 15px;
   background-color:white;
-  z-index: 0.8;
 }
 
-.footer {
-  padding: 10px;
-  text-align: center;
-  background-color: #111; 
-}
-
-.footer a{
-  text-decoration: none;
-  cursor: pointer;
-  color: antiquewhite;
-}
-
-a:visited {
-  color:white;
-}
-
-a:hover, a:focus {    
-  color:aquamarine;
-  text-decoration: underline ;
-}
-
+/* Circunferencia blanca */
 .center01 {
   position: absolute;
   background:antiquewhite;
@@ -152,9 +192,9 @@ a:hover, a:focus {
   border-radius: 50%;
   top: 90px;
   left: 200px;
-  /* z-index: 1; */
 }
 
+/* Parche superior foto */
 .center02 {
   position: absolute;
   width: 60px;
@@ -166,6 +206,7 @@ a:hover, a:focus {
   background: linear-gradient(to bottom right,slategray,lightgrey);
 }
 
+/* Parche inferior foto */
 .center03 {
   position: absolute;
   background: linear-gradient(to bottom right,lightgrey,slategray);
@@ -177,6 +218,7 @@ a:hover, a:focus {
   z-index: 1;
 }
 
+/* Circunferencia verde  */
 .center04 {
   position: absolute;
   background:green;
@@ -185,7 +227,6 @@ a:hover, a:focus {
   border-radius: 50%;
   top: 0px;
   left: 840px;
-  z-index: 0;
 }
 
 
